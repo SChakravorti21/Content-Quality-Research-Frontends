@@ -1,0 +1,35 @@
+{
+  "name": "Content Quality Extension",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "Allows users to better guage the reliability of answers they find online.",
+  "permissions": [
+      "storage", 
+      "declarativeContent", 
+      "activeTab", 
+      "tabs", 
+      "contextMenus", 
+      "notifications",
+      "<all_urls>",
+      "alarms"
+  ],
+  "icons": {
+    "16": "favicon.ico",
+    "32": "favicon.ico",
+    "48": "favicon.ico",
+    "128": "favicon.ico"
+  },
+  "browser_action": {
+    "default_popup": "index.html"
+  },
+  "background": {
+      "scripts": ["libs/jquery.min.js", "background.js"],
+      "persistent": false
+  },
+  "content_scripts": [{
+      "all_frames": true,
+      "js": ["libs/jquery.min.js"
+      ],
+      "matches": ["http://*/*", "https://*/*"]
+  }]
+}
