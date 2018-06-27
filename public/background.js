@@ -33,8 +33,8 @@ createMenus();
 var windowId = null;
 var popupTabId = 0;
 function createPopupWindow() {
-    let width = 550;
-    let height = 350;
+    let width = 400;
+    let height = 800;
     chrome.windows.create({
         url: "index.html",
         type: "popup",

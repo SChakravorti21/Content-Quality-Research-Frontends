@@ -89,7 +89,7 @@ class BrainlyParser extends QAParser {
         // in getting all answers and their data in a cleaner manner since the 
         // extensions can be applied to every answer node.
         let base_answer_class = '.brn-answer ';
-        let answer_extension = '.sg-text';
+        let answer_extension = '.sg-text.js-answer-content';
         let upvotes_extension = '.sg-rate-box__rate';
         let rep_extension = '.sg-breadcrumb-list__element .sg-link--gray';
 
