@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Chart from './components/chart';
+import Accordion from './components/accordion';
 import logo from './anatomy.png';
 import './App.css';
 
@@ -17,6 +18,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Content Quality Extension</h1>
         </header>
+        <br />
         <p className="App-intro">
           To get started, just open up any <code>Brainly</code> page, and we'll handle the rest.
           <small>
@@ -26,15 +28,8 @@ class App extends Component {
         </p>
         <div className="App-body">
           <Chart data={this.props.response}/>
-
-          <pre>
-            Collected:
-            {JSON.stringify(this.props.collected, null, 4)}
-          </pre>
-          <pre>
-            Response:
-            {JSON.stringify(this.props.response, null, 4)}
-          </pre>
+          <br />
+          <Accordion data={this.props.collected.brainly_data} />
         </div>
       </div>
     );
