@@ -27,7 +27,7 @@ class App extends Component {
           </small>
         </p>
         <div className="App-body">
-          <Chart data={this.props.response}/>
+          <Chart data={this.props.response.all_answers}/>
           <br />
           <Accordion data={this.props.collected.brainly_data} />
         </div>
