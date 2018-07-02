@@ -2,34 +2,6 @@ chrome.runtime.onInstalled.addListener(function() {
     console.log('The extension was installed');
 });
 
-function createMenus() {
-    chrome.contextMenus.create({
-        id: "question_selection",
-        title: "Select question",
-        contexts: ["selection"]
-    });
-
-    chrome.contextMenus.create({
-        id: "answer_selection",
-        title: "Select answer",
-        contexts: ["selection"]
-    });
-
-    chrome.contextMenus.create({
-        id: "eval",
-        title: "Evaluate",
-        contexts: ["page", "selection"]
-    });
-
-    chrome.contextMenus.create({
-        id: "answer_selection_eval",
-        title: "Select answer and evaluate",
-        contexts: ["selection"]
-    });
-}
-
-createMenus();
-
 var windowId = null;
 var popupTabId = 0;
 function createPopupWindow() {
@@ -63,42 +35,6 @@ function updatePopupWindow(collected_data, response) {
         });
     });
 }
-
-chrome.contextMenus.onClicked.addListener(function(selectedMenuItem, tab) {
-    if(selectedMenuItem.menuItemId === "question_selection") {
-        console.log('Question selected');
-        chrome.tabs.executeScript(null, {file: "helper_scripts/save_question.js"}, function() {
-            chrome.notifications.create(null, {
-                type: "basic",
-                iconUrl: "images/get_started32.png",
-                title: "Q&A Quality",
-                message: "Question was updated."
-            }, function(id) {
-                chrome.notifications.clear(id);
-            });
-        });
-    } else if(selectedMenuItem.menuItemId === "answer_selection") {
-        console.log("Answer selected");
-        chrome.tabs.executeScript(null, {file: "helper_scripts/save_answer.js"}, function() {
-            chrome.notifications.create(null, {
-                type: "basic",
-                iconUrl: "images/get_started32.png",
-                title: "Q&A Quality",
-                message: "Answer was updated"
-            }, function(id) {
-                chrome.notifications.clear(id);
-            });
-        });
-    } else if(selectedMenuItem.menuItemId === "eval") {
-        console.log("Evaluating");
-        createPopupWindow();
-    } else if(selectedMenuItem.menuItemId === "answer_selection_eval") {
-        console.log("Answer selected and evaluation will be executed");
-        chrome.tabs.executeScript(null, {file: "helper_scripts/save_answer.js"}, function(response) {
-            createPopupWindow();
-        });
-    }
-});
 
 function inject_all_scripts(tab_id, script_list) {
     chrome.tabs.executeScript(tab_id, {file: script_list[0]}, function() {
@@ -178,7 +114,7 @@ function sendTestingData(payload) {
     console.log('sending to server');
     $.ajax({
         type: 'POST',
-        url: 'http://localhost:8000/reliability/collect_data',
+        url: 'http://localhost:8000/reliability/generate_report',
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         // The Django server expects JSON payloads as a String then parses it using json.loads(payload)

@@ -103,11 +103,13 @@ class BrainlyParser extends QAParser {
         // Cannot use 'this' until super constructor is called
         this.base_answer_class = base_answer_class;
         this.answer_extension = answer_extension;
-        this.anonymous_answer_extension = this.answer_extension + '.js-answer-content'
         this.upvotes_extension = upvotes_extension;
         this.rep_extension = rep_extension;
+
+        this.anonymous_answer_extension = this.answer_extension + '.js-answer-content';
+        this.user_extension = '.sg-link[href*="profile"]';
         this.num_upvotes_extension = '.sg-rate-box__counter-item-dynamic';
-        this.thanks_extension = '.sg-label__number'
+        this.thanks_extension = '.sg-label__number';
         this.subject_extension = '.brn-question .sg-breadcrumb-list span';
     }
 
@@ -160,9 +162,13 @@ class BrainlyParser extends QAParser {
         // For each answer node, parse the relevant data
         all_answer_nodes.forEach(answer_node => {
             var text = answer_node.querySelector(this.answer_extension).innerText;
+            var user;
             // Edge case for anonymous answerers, the selectors are a bit different
             if (text === 'Brainly User') {
+                user = text;
                 text = answer_node.querySelector(this.anonymous_answer_extension).innerText;
+            } else {
+                user = answer_node.querySelector(this.user_extension).innerText;
             }
 
             var rep = 'Brainly User';
@@ -182,6 +188,7 @@ class BrainlyParser extends QAParser {
             let answer_data = {
                 question: this.getQuestion(),
                 subject: this.getSubject(),
+                user: user,
                 text: text,
                 rating: upvotes,
                 reputation: rep,

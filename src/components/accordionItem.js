@@ -9,6 +9,8 @@ class AccordionItem extends Component {
 
             let body = (
                 <div>
+                    <b>Answerer: </b> {answer.user}
+                    <br />
                     <b>Answer: </b> {answer.text}
                     <br />
                     <b>Answerer's Reputation: </b> {answer.reputation}

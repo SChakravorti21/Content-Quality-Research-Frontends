@@ -13,14 +13,17 @@ class Accordion extends Component {
                                 type={AccordionItemEnum.text}
                                 content={this.props.data.question}
                                 position={1} />
+
                 <AccordionItem  title="Top Answer"
                                 type={AccordionItemEnum.answer}
                                 content={this.props.data.top_answer}
                                 position={2} />
+
                 <AccordionItem  title="Subject"
                                 type={AccordionItemEnum.text}
                                 content={this.props.data.subject}
                                 position={3} />
+                                
                 <AccordionItem  title="Raw Data"
                                 type={AccordionItemEnum.raw_data}
                                 content={this.props.data}
