@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
+import './accordionItem.css';
 
 class AccordionItem extends Component {
     constructor(props) {
         super(props);
+        var body = null;
 
         if(this.props.type === AccordionItemEnum.answer) {
             let answer = this.props.content;
 
-            let body = (
+            body = (
                 <div>
                     <b>Answerer: </b> {answer.user}
                     <br />
@@ -20,10 +22,29 @@ class AccordionItem extends Component {
                     <b>Thanks Given: </b> {answer.num_thanks}
                 </div>
             );
+        } else if(this.props.type === AccordionItemEnum.all_answers) {
+            let answers = this.props.content;
+            var index = 0;
+            body = [];
 
-            this.props.content = body;
-        } else if (this.props.type === AccordionItemEnum.raw_data) {
-            this.props.content = <pre>{JSON.stringify(this.props.content, null, 4)}</pre>;
+            for(var answer of answers) {
+                body.push(
+                    <div key={++index}>
+                        <p className="compact-text"><b>Answerer: </b> {answer.user}</p>
+                        <p className="compact-text"><b>Answer: </b> {answer.text}</p>
+                        <p className="compact-text"><b>Answerer's Reputation: </b> {answer.reputation}</p>
+                        <p className="compact-text"><b>Rating: </b> {answer.rating} with {answer.num_upvotes} votes.</p>
+                        <p className="compact-text"><b>Thanks Given: </b> {answer.num_thanks}</p>
+                        <br />
+                    </div>
+                );
+            }
+        } else {
+            body = this.props.content;
+        }
+
+        this.state = {
+            content: body
         }
     }
 
@@ -42,7 +63,7 @@ class AccordionItem extends Component {
 
               <div id={`collapse-${position}`} className="collapse" aria-labelledby={`heading-${position}`} data-parent="#accordion">
                 <div className="card-body">
-                    {this.props.content}
+                    {this.state.content}
                 </div>
               </div>
             </div>
@@ -51,9 +72,8 @@ class AccordionItem extends Component {
 }
 
 let AccordionItemEnum = Object.freeze({
-    raw_data: 1,
-    text: 2,
-    answer: 3
+    text: 1,
+    all_answers: 2
 });
 
 export default AccordionItem;

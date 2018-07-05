@@ -72,40 +72,7 @@ chrome.tabs.onUpdated.addListener(function(activeInfo) {
     requestSource();
 });
 
-function checkAvailability(data, url) {
-    var lastSlash = url.lastIndexOf('/');
-    var lastAnd = url.lastIndexOf('&');
-    var lastQuestion = url.lastIndexOf('?');
-
-    var maxIndex = Math.max(Math.max(lastAnd, lastQuestion), lastSlash);
-    if(maxIndex === -1) {
-        data.availability = {url: '', closest: {available: false, timestamp: 0}};
-        sendTestingData(data);
-    } else {
-        // console.log(url);
-
-        $.ajax({
-            'url': url,
-            success: function(response) {
-                console.log(response)
-                if(response.archived_snapshots && response.archived_snapshots.closest) {
-                    data.availability = response;
-                    sendTestingData(data);
-                } else {
-                    checkAvailability(data, url.substring(0, maxIndex));
-                } 
-            },
-            error: function(response) {
-                console.log(response);
-                // TODO: Handle error through UI as well
-                data.availability = {url: '', closest: {available: false, timestamp: 0}};
-                sendTestingData(data);
-            }
-          });
-    }
-}
-
-function sendTestingData(payload) {
+function sendCollectedData(payload) {
     console.log(payload)
 
     if(!payload.brainly_data || payload.brainly_data.all_answers.length < 1)
@@ -139,8 +106,7 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
             console.log('got source')
             // console.log(request.data);
         
-            let startingUrl = 'http://archive.org/wayback/available?url=' + request.data.href;
-            checkAvailability(request.data, startingUrl);
+            sendCollectedData(request.data)
         }
     } 
     else if(request.action == "get_availability") {

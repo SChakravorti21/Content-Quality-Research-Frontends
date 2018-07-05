@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Chart from './components/chart';
-import Accordion from './components/accordion';
+import Chart from './components/Chart/chart';
+import Accordion from './components/Accordion/accordion';
 import logo from './anatomy.png';
 import './App.css';
 
@@ -9,6 +9,14 @@ class App extends Component {
     super(props);
     console.log('in ctor')
     console.log(props)
+  }
+
+  componentDidMount() {
+    /*eslint-disable no-undef*/
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+    /*eslint-enable no-undef*/
   }
 
   render() {
@@ -20,16 +28,15 @@ class App extends Component {
         </header>
         <br />
         <p className="App-intro">
-          To get started, just open up any <code>Brainly</code> page, and we'll handle the rest.
-          <small>
-             &nbsp; (Background tasks will check when a <code>Brainly</code> page is opened and
-             automatically reload this extension.)
-          </small>
+          To get started, just open up any major <code>user-generated content</code> page, and we'll handle the rest.
         </p>
         <div className="App-body">
           <Chart data={this.props.response.all_answers}/>
           <br />
-          <Accordion data={this.props.collected.brainly_data} />
+
+          <div id="content-accordion">
+            <Accordion data={this.props.collected.brainly_data} />
+          </div>
         </div>
       </div>
     );

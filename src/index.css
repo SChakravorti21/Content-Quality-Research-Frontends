@@ -3,14 +3,3 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
-
-/******************/
-/*   Accordion    */
-/******************/
-
-.accordion-link {
-  /* !important generally should not be used,
-      but the btn-link class also defines text-decoration,
-      so that needs to be overriden. */
-  text-decoration: none !important;
-}
