@@ -11,15 +11,13 @@ class App extends Component {
     console.log(props)
   }
 
-  componentDidMount() {
-    /*eslint-disable no-undef*/
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
-    })
-    /*eslint-enable no-undef*/
-  }
-
   render() {
+    let charts = this.props.response.all_answers.map((value) => {
+      return <Chart answer={value} />
+    });
+
+    console.log(charts)
+
     return (
       <div className="App">
         <header className="App-header">
@@ -28,10 +26,13 @@ class App extends Component {
         </header>
         <br />
         <p className="App-intro">
-          To get started, just open up any major <code>user-generated content</code> page, and we'll handle the rest.
+          <small>
+            To get started, just open up any major <code>user-generated content</code> page, and we'll handle the rest.
+          </small>
         </p>
         <div className="App-body">
-          <Chart data={this.props.response.all_answers}/>
+          <h5 style={{textAlign: 'center'}}>Answer Scores</h5>
+          {charts}
           <br />
 
           <div id="content-accordion">
