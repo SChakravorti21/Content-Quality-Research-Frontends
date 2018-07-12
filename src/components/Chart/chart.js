@@ -19,7 +19,7 @@ export default class Chart extends Component {
     render() {
         return (
             <div>
-                <p><b>Answer:</b>{this.props.answer.text}</p>
+                <p><b>Answer {this.props.index}:</b>{this.props.answer.text}</p>
 
                 <XYPlot
                     margin={{
@@ -43,6 +43,8 @@ export default class Chart extends Component {
                         //onValueMouseOut={this.mouseOut} 
                     /> 
                 </XYPlot>
+
+                <br />
             </div>
         )
     }

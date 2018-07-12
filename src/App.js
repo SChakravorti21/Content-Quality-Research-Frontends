@@ -12,8 +12,8 @@ class App extends Component {
   }
 
   render() {
-    let charts = this.props.response.all_answers.map((value) => {
-      return <Chart answer={value} />
+    let charts = this.props.response.all_answers.map((value, index) => {
+      return <Chart index={index+1} answer={value} />
     });
 
     console.log(charts)
@@ -32,6 +32,7 @@ class App extends Component {
         </p>
         <div className="App-body">
           <h5 style={{textAlign: 'center'}}>Answer Scores</h5>
+          <br />
           {charts}
           <br />
 
