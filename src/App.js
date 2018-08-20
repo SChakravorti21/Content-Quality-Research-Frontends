@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Chart from './components/Chart/chart';
-import Accordion from './components/Accordion/accordion';
 import logo from './anatomy.png';
 import './App.css';
 
@@ -15,8 +14,6 @@ class App extends Component {
     let charts = this.props.response.all_answers.map((value, index) => {
       return <Chart index={index+1} answer={value} />
     });
-
-    console.log(charts)
 
     return (
       <div className="App">
@@ -35,10 +32,6 @@ class App extends Component {
           <br />
           {charts}
           <br />
-
-          <div id="content-accordion">
-            <Accordion data={this.props.collected.brainly_data} />
-          </div>
         </div>
       </div>
     );

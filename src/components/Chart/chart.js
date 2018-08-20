@@ -19,7 +19,7 @@ export default class Chart extends Component {
     render() {
         return (
             <div>
-                <p><b>Answer {this.props.index}:</b>{this.props.answer.text}</p>
+                <p><b>Answer {this.props.index}:</b> {this.props.answer.text} </p>
 
                 <XYPlot
                     margin={{
@@ -92,6 +92,11 @@ export default class Chart extends Component {
                 y: 'Correctness',
                 x: answer.inference.correctness,
                 color: '#3943B7'
+            },
+            {
+                y: 'Overall',
+                x: answer.inference.overall,
+                color: '#F8F4A6'
             }
         ]
 

@@ -81,7 +81,7 @@ function sendCollectedData(payload) {
     console.log('sending to server');
     $.ajax({
         type: 'POST',
-        url: 'http://localhost:8000/reliability/generate_report',
+        url: 'http://ugc-django-server.herokuapp.com/reliability/generate_report',
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         // The Django server expects JSON payloads as a String then parses it using json.loads(payload)
