@@ -6,7 +6,6 @@ import {
     VerticalGridLines,
     HorizontalGridLines,
     HorizontalBarSeries,
-    GradientDefs
   } from 'react-vis';
 import Popper from 'popper.js';
 
@@ -28,6 +27,8 @@ export default class Chart extends Component {
     }
 
     render() {
+        // previous colors '#E08E45', '#F7EE40', '#BDF7B7', '#E4C5AF'
+
         return (
             <div
                 ref={this.chartWrapper}
@@ -43,11 +44,12 @@ export default class Chart extends Component {
                     width={350}
                     height={200}
                     yType='ordinal'
-                    colorRange={['#E08E45', '#F7EE40', '#BDF7B7', '#E4C5AF']}>
+                    xDomain={[0, 105]}
+                    colorRange={['#000000']} >
 
                     <VerticalGridLines />
                     <HorizontalGridLines />
-                    <XAxis />
+                    <XAxis tickValues={[0, 20, 40, 60, 80, 100]} />
                     <YAxis tickLabelAngle={-45}/>
                     
                     <HorizontalBarSeries  
@@ -132,28 +134,28 @@ export default class Chart extends Component {
         let scores = [
             {
                 y: 'Credibility',
-                x: answer.inference.credibility,
-                color: '#E08E45'
+                x: Math.round(answer.inference.credibility),
+                color: '#000000' // '#E08E45'
             },
             {
                 y: 'Clearness',
-                x: answer.inference.clearness,
-                color: '#F8F4A6'
+                x: Math.round(answer.inference.clearness),
+                color: '#000000' // '#F8F4A6'
             },
             {
                 y: 'Completeness',
-                x: answer.inference.completeness,
-                color: '#BDF7B7'
+                x: Math.round(answer.inference.completeness),
+                color: '#000000' // '#BDF7B7'
             },
             {
                 y: 'Correctness',
-                x: answer.inference.correctness,
-                color: '#3943B7'
+                x: Math.round(answer.inference.correctness),
+                color: '#000000' // '#3943B7'
             },
             {
                 y: 'Overall',
-                x: answer.inference.overall,
-                color: '#F8F4A6'
+                x: Math.round(answer.inference.overall),
+                color: '#000000' // '#F8F4A6'
             }
         ]
 
