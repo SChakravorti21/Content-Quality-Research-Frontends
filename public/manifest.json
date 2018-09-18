@@ -23,7 +23,11 @@
     "default_popup": "index.html"
   },
   "background": {
-      "scripts": ["libs/jquery.min.js", "background.js"],
+      "scripts": [
+        "libs/jquery.min.js", 
+        "background_scripts/popup_window_manager.js",
+        "background.js"
+      ],
       "persistent": false
   },
   "content_scripts": [{

@@ -1,40 +1,4 @@
-chrome.runtime.onInstalled.addListener(function() {
-    console.log('The extension was installed');
-});
-
-var windowId = null;
-var popupTabId = 0;
-function createPopupWindow() {
-    let width = 400;
-    let height = 800;
-    chrome.windows.create({
-        url: "index.html",
-        type: "popup",
-        left: window.screen.availWidth - width,
-        top: 0,
-        width: width,
-        height: height
-    }, function(window) {
-        windowId = window.id;
-
-        // Get the tab id as well
-        chrome.tabs.query({'windowId' : windowId}, 
-            (tabs) => popupTabId = tabs[0].id);
-    });
-}
-
-//TODO: Implement update function
-function updatePopupWindow(collected_data, response) {
-    console.log('updating window')
-    // console.log(collected_data)
-    chrome.storage.sync.set({'collected': collected_data, 'response': response}, function() {
-        chrome.tabs.reload(popupTabId, function() {
-            // The popup window no longer exists, create it
-            if(chrome.runtime.lastError)
-                createPopupWindow();
-        });
-    });
-}
+let popupWindowManager = new PopupWindowManager();
 
 function inject_all_scripts(tab_id, script_list) {
     chrome.tabs.executeScript(tab_id, {file: script_list[0]}, function() {
@@ -57,16 +21,6 @@ function requestSource() {
     }
 }
 
-chrome.tabs.onActivated.addListener(function(activeInfo) {
-    console.log('activated');
-    requestSource();
-});
-
-chrome.tabs.onCreated.addListener(function(activeInfo) {
-    console.log('created');
-    requestSource();
-});
-
 chrome.tabs.onUpdated.addListener(function(activeInfo) {
     console.log('updated');
     requestSource();
@@ -88,11 +42,10 @@ function sendCollectedData(payload) {
         data: JSON.stringify(payload),
         success: function(response) {
             console.log(response);
-            updatePopupWindow(payload, response);
+            popupWindowManager.updatePopupWindow(payload, response);
         },
         failure: function(response) {
             console.log(response);
-            updatePopupWindow(payload, response);
         }
     })
 }
