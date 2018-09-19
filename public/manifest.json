@@ -25,7 +25,8 @@
   "background": {
       "scripts": [
         "libs/jquery.min.js", 
-        "background_scripts/popup_window_manager.js",
+        "backgroundScripts/popupWindowManager.js",
+        "backgroundScripts/pageSourceScraper.js",
         "background.js"
       ],
       "persistent": false
