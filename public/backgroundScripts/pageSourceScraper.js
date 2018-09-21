@@ -2,9 +2,11 @@ class PageSourceScraper {
 
     constructor(contentScripts = [
         "libs/jquery.min.js", 
-        "helperScripts/parsers/parsers.js", 
+        "helperScripts/parsers/Parser.js",
+        "helperScripts/modifiers/Modifier.js", 
         "helperScripts/parsers/QAParser.js", 
         "helperScripts/parsers/BrainlyParser.js", 
+        "helperScripts/modifiers/BrainlyModifier.js", 
         "helperScripts/parsers/WikiParser.js", 
         "helperScripts/parseDocument.js"
     ]) {

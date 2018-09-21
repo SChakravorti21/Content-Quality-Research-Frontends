@@ -1,23 +1,3 @@
-function numPeriods(string) {
-    var num = 0;
-    for (let i = 0; i < string.length; i++) {
-        const element = string.charAt(i);
-        num += (element == '.') ? 1 : 0;
-    }
-    return num;
-}
-
-function getDomainName() {
-    let hostname = location.hostname;
-    let domainname = '';
-    if(numPeriods(hostname) < 2) {
-        domainname = hostname.substring(0, hostname.indexOf("."));
-    } else {
-        domainname = hostname.substring(hostname.indexOf(".") + 1, hostname.lastIndexOf("."));
-    }
-    return domainname;
-}
-
 function initializeParser(href) {
     if(href.includes('wiki')) {
         return new WikiParser();
@@ -28,7 +8,6 @@ function initializeParser(href) {
     }
 }
 
-let key = getDomainName();
 let hostname = location.hostname;
 let site_href = location.href;
 let source = hostname.substr(hostname.lastIndexOf(".") + 1);
@@ -50,6 +29,7 @@ try {
         data.wiki_data = parser.getParsedWikiPage(['.mw-parser-output', '#mw-content-text']);
     } else if(site_href.includes('brainly')) {
         data.brainly_data = parser.getParsedBrainlyPage();
+        new BrainlyModifier().modifyPageSource();
     }
 
     // Only for printing the JSON so that it can be emailed for reference
