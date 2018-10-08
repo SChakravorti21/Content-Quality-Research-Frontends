@@ -3,6 +3,8 @@ function initializeParser(href) {
         return new WikiParser();
     } else if(href.includes('brainly')) {
         return new BrainlyParser();
+    } else if(site_href.includes('answers.com')) {
+        return new AnswersParser();
     } else {
         return new Parser();
     }
@@ -30,6 +32,9 @@ try {
     } else if(site_href.includes('brainly')) {
         data.brainly_data = parser.getParsedBrainlyPage();
         new BrainlyModifier().modifyPageSource();
+    } else if(site_href.includes('answers')) {
+        data.answers_data = parser.getParsedAnswersPage()
+        console.log(data);
     }
 
     // Only for printing the JSON so that it can be emailed for reference
