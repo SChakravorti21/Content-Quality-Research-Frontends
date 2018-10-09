@@ -3,12 +3,14 @@
     
     window.RedditParser = class RedditParser extends QAParser {
         constructor() {
-            super('a.title', 'div.md-container');
+            super('a.title', 'div.md-container', 'div.score.unvoted');
         }
 
         getParsedRedditPage() {
             return {
-                text: this.getQuestion() + " : " + this.getTopAnswer()
+                title: this.getQuestion(),
+                body: this.getTopAnswer(),
+                score: this.getAnswerVotes()
             }
         }
 
