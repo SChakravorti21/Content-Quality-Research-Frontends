@@ -5,6 +5,8 @@ function initializeParser(href) {
         return new BrainlyParser();
     } else if(site_href.includes('answers.com')) {
         return new AnswersParser();
+    } else if(site_href.includes('reddit')) {
+        return new RedditParser();
     } else {
         return new Parser();
     }
@@ -33,7 +35,9 @@ try {
         data.brainly_data = parser.getParsedBrainlyPage();
         new BrainlyModifier().modifyPageSource();
     } else if(site_href.includes('answers')) {
-        data.answers_data = parser.getParsedAnswersPage()
+        data.answers_data = parser.getParsedAnswersPage();
+    } else if(site_href.includes('reddit')) {
+        data.reddit_data = parser.getParsedRedditPage();
         console.log(data);
     }
 

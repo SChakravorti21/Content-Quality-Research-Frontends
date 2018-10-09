@@ -9,6 +9,7 @@ class PageSourceScraper {
         "helperScripts/modifiers/BrainlyModifier.js", 
         "helperScripts/parsers/WikiParser.js",
         "helperScripts/parsers/AnswersParser.js", 
+        "helperScripts/parsers/RedditParser.js", 
         "helperScripts/parseDocument.js"
     ]) {
         this.contentScripts = contentScripts;

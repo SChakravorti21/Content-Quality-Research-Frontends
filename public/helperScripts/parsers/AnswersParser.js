@@ -1,7 +1,7 @@
 (function() {
     if(window.AnswersParser) return;
     
-    window.AnswersParser = class BrainlyParser extends QAParser {
+    window.AnswersParser = class AnswersParser extends QAParser {
         constructor() {
             super('span.title_text', 'div.answer_wrapper');
         }
