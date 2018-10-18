@@ -2,16 +2,10 @@ import React, { Component } from "react";
 import "./question.css";
 import Chart from "./Chart";
 
-let AnswerNumber = {
-    ONE: 1,
-    TWO: 2
-};
-
 export default class Question extends Component {
     constructor(props) {
         super(props);
-        this.state = { answerNumber: AnswerNumber.ONE };
-        console.log(props);
+        this.state = { answerNumber: 0 };
     }
 
     updateSelectedAnswer = (answerNumber) => {
@@ -19,6 +13,20 @@ export default class Question extends Component {
     };
 
     render() {
+        const charts = this.props.answers.map((answer, index) => {
+            return (
+                <div className="radio">
+                    <label className="answer-label">
+                        <input type="radio" value={answer.text}
+                               checked={this.state.answerNumber === index}
+                               onChange={() => this.updateSelectedAnswer(index)} />
+                        {answer.text}
+                        <Chart showAnswer={false} index={index} answer={answer}/>
+                    </label>
+                </div>
+            )
+        });
+
         return (
             <div className="view-wrapper">
                 <div className="question-wrapper-small">
@@ -39,46 +47,9 @@ export default class Question extends Component {
                     </div>
                     <div className="response">
                         <div className="radio">
-                            <label>
-                                <input type="radio" value={this.props.answers[0].text}
-                                       checked={this.state.answerNumber === AnswerNumber.ONE}
-                                       onChange={() => this.updateSelectedAnswer(AnswerNumber.ONE)} />
-                                {this.props.answers[0].text}
-                            </label>
-                        </div>
-                        <div className="radio">
-                            <label>
-                                <input type="radio" value={this.props.answers[1].text}
-                                       checked={this.state.answerNumber === AnswerNumber.TWO}
-                                       onChange={() => this.updateSelectedAnswer(AnswerNumber.TWO)} />
-                                {this.props.answers[1].text}
-                            </label>
+                            {charts}
                         </div>
                     </div>
-                </div>
-
-                <div className="chart-wrapper">
-                    <Chart showAnswer={true} index={1} answer={{
-                        inference: {
-                            credibility: 70,
-                            clearness: 90,
-                            completeness: 70,
-                            correctness: 60,
-                            overall: 50,
-                        },
-                        text: ""
-                    }}/>
-
-                    <Chart showAnswer={true} index={2} answer={{
-                        inference: {
-                            credibility: 10,
-                            clearness: 20,
-                            completeness: 70,
-                            correctness: 0,
-                            overall: 50,
-                        },
-                        text: ""
-                    }}/>
                 </div>
             </div>
         )

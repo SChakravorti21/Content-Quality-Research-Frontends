@@ -25,7 +25,7 @@ export default class QuestionnaireCarousel extends Component {
                     <MetaQuestion/>
                 </div>
                 <div>
-                    <Question answers={[test_data.answer1, test_data.answer2]} />
+                    <Question answers={test_data.answers} />
                 </div>
             </Carousel>
         );

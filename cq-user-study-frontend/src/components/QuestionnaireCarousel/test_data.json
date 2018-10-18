@@ -1,8 +1,24 @@
 {
-  "answer1": {
-    "text": "The two statements that describe the girls' experience are: \"Heat was transferred from the fire to the rock.\" and \"The girls used conduction to cook the bacon.\". The heat that the rocks had to cook the bacon was obtained when they were in the fire, the rocks accumulated heat and were then releasing it. Heat was transferred from the fire to the rocks. By cooking the bacon on the hot rocks, the heat accumulated in the stones was being transferred to the surrounding environment of the rocks and as the bacon was in direct contact with rocks, plus a heat conducting fluid was in between, that heat was passed to the bacon by conduction. There was no convection currents to cook the bacon; the bacon and the fire were in no equilibrium as they were not even in contact; energy was transferred from the rocks to the bacon and not from the bacon to the rocks as the bacon got warmer."
-  },
-  "answer2": {
-    "text": "Camille and her friends enjoy experimenting with different foods. During a camping trip, they decide to fry bacon using nothing more than hot rocks. Camille heats a rock in the campfire for 30 minutes, and then removes it with tongs. She greases the rock and lays the bacon strips directly on it. The bacon turns out great, and the girls enjoy the food. Which two sentences accurately describe the girls’ experience with heat transfer? options: Heat was transferred from the fire to the rock. The girls cooked the bacon using convection currents. The bacon and the fire were in thermal equilibrium<====== The bacon lost energy to the rocks as they got warmer. The girls used conduction to cook the bacon. there can be multiple answers"
-  }
+  "answers": [
+    {
+      "text": "The two statements that describe the girls' experience are: \"Heat was transferred from the fire to the rock.\" and \"The girls used conduction to cook the bacon.\". The heat that the rocks had to cook the bacon was obtained when they were in the fire, the rocks accumulated heat and were then releasing it. Heat was transferred from the fire to the rocks. By cooking the bacon on the hot rocks, the heat accumulated in the stones was being transferred to the surrounding environment of the rocks and as the bacon was in direct contact with rocks, plus a heat conducting fluid was in between, that heat was passed to the bacon by conduction. There was no convection currents to cook the bacon; the bacon and the fire were in no equilibrium as they were not even in contact; energy was transferred from the rocks to the bacon and not from the bacon to the rocks as the bacon got warmer.",
+      "inference": {
+        "credibility": 70,
+        "clearness": 90,
+        "completeness": 70,
+        "correctness": 60,
+        "overall": 50
+      }
+    },
+    {
+      "text": "Camille and her friends enjoy experimenting with different foods. During a camping trip, they decide to fry bacon using nothing more than hot rocks. Camille heats a rock in the campfire for 30 minutes, and then removes it with tongs. She greases the rock and lays the bacon strips directly on it. The bacon turns out great, and the girls enjoy the food. Which two sentences accurately describe the girls’ experience with heat transfer? options: Heat was transferred from the fire to the rock. The girls cooked the bacon using convection currents. The bacon and the fire were in thermal equilibrium<====== The bacon lost energy to the rocks as they got warmer. The girls used conduction to cook the bacon. there can be multiple answers",
+      "inference": {
+        "credibility": 10,
+        "clearness": 20,
+        "completeness": 5,
+        "correctness": 0,
+        "overall": 15
+      }
+    }
+    ]
 }

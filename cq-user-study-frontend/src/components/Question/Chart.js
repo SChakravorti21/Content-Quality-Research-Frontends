@@ -46,7 +46,7 @@ export default class Chart extends Component {
                         left: 100
                     }}
                     width={350}
-                    height={250}
+                    height={150}
                     yType='ordinal'
                     xDomain={[0, 105]}
                     colorRange={['#000000']} >
@@ -79,7 +79,6 @@ export default class Chart extends Component {
     }
 
     mouseOver = (event) => {
-        console.log(event.target);
         let root = event.target;
         if(root && root.tagName !== 'rect')
             return;
@@ -87,17 +86,13 @@ export default class Chart extends Component {
         let tooltipElement = document.querySelector('#popper');
         tooltipElement.removeAttribute("hidden");
 
-        console.log(tooltipElement);
-
         let content = tooltipElement.querySelector('#popper-content');
         let score = this.getPartialScore(root);
         content.innerHTML = this.constructTooltipMessage(score);
 
-        const tooltip = new Popper(root, tooltipElement, {
-            placement: 'bottom'
+        this.tooltip = new Popper(root, tooltipElement, {
+            placement: 'top'
         });
-
-        this.tooltip = tooltip;
         this.tooltipElement = tooltipElement;
     }
 
