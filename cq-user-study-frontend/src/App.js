@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import './styles/bootstrap.min.css';
 import QuestionnaireCarousel from "./components/QuestionnaireCarousel/QuestionnaireCarousel";
 
 class App extends Component {

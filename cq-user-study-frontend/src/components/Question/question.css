@@ -1,0 +1,39 @@
+.view-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.question-wrapper-large {
+    text-align: justify;
+    margin: 5em;
+}
+
+.question-wrapper-small {
+    text-align: justify;
+    margin: 5em;
+    width: 60%;
+}
+
+.question {
+    padding: 1em;
+    border: #5a6268 1px solid;
+}
+
+.meta-question {
+    margin-top: 1.5em;
+    margin-left: 2em;
+}
+
+.meta-response {
+    margin-left: 2em;
+    width: 25em;
+}
+
+.response {
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+input[type="radio"] {
+    margin-right: 1em;
+}
