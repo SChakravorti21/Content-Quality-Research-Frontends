@@ -57,15 +57,29 @@ export default class Question extends Component {
                     </div>
                 </div>
 
-                <Chart showAnswer={false} answer={{
-                    inference: {
-                        credibility: 10,
-                        clearness: 90,
-                        completeness: 70,
-                        correctness: 60,
-                        overall: 50,
-                    }
-                }}/>
+                <div className="chart-wrapper">
+                    <Chart showAnswer={true} index={1} answer={{
+                        inference: {
+                            credibility: 70,
+                            clearness: 90,
+                            completeness: 70,
+                            correctness: 60,
+                            overall: 50,
+                        },
+                        text: ""
+                    }}/>
+
+                    <Chart showAnswer={true} index={2} answer={{
+                        inference: {
+                            credibility: 10,
+                            clearness: 20,
+                            completeness: 70,
+                            correctness: 0,
+                            overall: 50,
+                        },
+                        text: ""
+                    }}/>
+                </div>
             </div>
         )
     }

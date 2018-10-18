@@ -7,6 +7,7 @@ import {
     HorizontalGridLines,
     HorizontalBarSeries,
 } from 'react-vis';
+import "./chart.css";
 import Popper from 'popper.js';
 
 export default class Chart extends Component {
@@ -33,10 +34,11 @@ export default class Chart extends Component {
             <div
                 ref={this.chartWrapper}
                 onMouseOver={this.mouseOver}
-                onMouseOut={this.mouseOut} >
+                onMouseOut={this.mouseOut}
+                className="chart">
 
                 {this.props.showAnswer &&
-                <p><b>Answer {this.props.index}:</b> {this.props.answer.text} </p>
+                <div><b>Answer {this.props.index}:</b> {this.props.answer.text} </div>
                 }
 
                 <XYPlot
@@ -44,7 +46,7 @@ export default class Chart extends Component {
                         left: 100
                     }}
                     width={350}
-                    height={200}
+                    height={250}
                     yType='ordinal'
                     xDomain={[0, 105]}
                     colorRange={['#000000']} >
@@ -92,7 +94,7 @@ export default class Chart extends Component {
         content.innerHTML = this.constructTooltipMessage(score);
 
         const tooltip = new Popper(root, tooltipElement, {
-            placement: 'top'
+            placement: 'bottom'
         });
 
         this.tooltip = tooltip;
