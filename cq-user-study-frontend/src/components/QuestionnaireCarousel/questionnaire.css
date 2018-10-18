@@ -1,0 +1,13 @@
+.questionnaire-carousel {
+    height: 100vh;
+    width: 100vw;
+    background-color: white;
+}
+
+.slide {
+    background: #FFF !important;
+}
+
+.carousel .control-next.control-arrow:before {
+    border-left: 8px solid #000 !important;
+}
