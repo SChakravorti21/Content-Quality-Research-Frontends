@@ -13,18 +13,30 @@ export default class Question extends Component {
     };
 
     render() {
-        const charts = this.props.answers.map((answer, index) => {
+        const options = this.props.answers.map((answer, index) => {
+            let features = <p>Number of <b>thanks</b>: {answer.num_thanks},
+                number of <b>upvotes</b>: {answer.num_upvotes},
+                answer <b>rating</b>: {answer.rating}/5,
+                answerer's <b>reputation</b>: {answer.reputation}</p>;
+
             return (
                 <div className="radio">
                     <label className="answer-label">
                         <input type="radio" value={answer.text}
                                checked={this.state.answerNumber === index}
                                onChange={() => this.updateSelectedAnswer(index)} />
-                        {answer.text}
-                        <Chart showAnswer={false} index={index} answer={answer}/>
+                        <div>
+                            {answer.text}
+                            {features}
+                        </div>
                     </label>
                 </div>
             )
+        });
+
+        const charts = this.props.answers.map((answer, index) => {
+            answer.text = "";
+            return <Chart showAnswer={true} index={index+1} answer={answer}/>;
         });
 
         return (
@@ -47,9 +59,13 @@ export default class Question extends Component {
                     </div>
                     <div className="response">
                         <div className="radio">
-                            {charts}
+                            {options}
                         </div>
                     </div>
+                </div>
+
+                <div className="chart-wrapper">
+                    {charts}
                 </div>
             </div>
         )
