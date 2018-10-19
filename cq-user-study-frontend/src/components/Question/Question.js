@@ -22,7 +22,7 @@ export default class Question extends Component {
             return (
                 <div className="radio">
                     <label className="answer-label">
-                        <input type="radio" value={answer.text}
+                        <input type="radio"
                                checked={this.state.answerNumber === index}
                                onChange={() => this.updateSelectedAnswer(index)} />
                         <div>
@@ -35,8 +35,7 @@ export default class Question extends Component {
         });
 
         const charts = this.props.answers.map((answer, index) => {
-            answer.text = "";
-            return <Chart showAnswer={true} index={index+1} answer={answer}/>;
+            return <Chart showAnswer={false} index={index+1} answer={answer}/>;
         });
 
         return (

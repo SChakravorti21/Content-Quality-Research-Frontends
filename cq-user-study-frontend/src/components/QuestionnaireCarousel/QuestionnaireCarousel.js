@@ -20,6 +20,7 @@ export default class QuestionnaireCarousel extends Component {
                 showStatus={false}
                 showIndicators={false}
                 useKeyboardArrows
+                dynamicHeight
                 className="presentation-mode questionnaire-carousel">
                 <div>
                     <MetaQuestion/>
