@@ -1,6 +1,7 @@
 .view-wrapper {
     display: flex;
     flex-direction: row;
+    width: 80%;
 }
 
 .question-wrapper-large {
@@ -29,7 +30,8 @@
 
 .chart-wrapper {
     margin-top: 5em;
-    margin-right: 5em;
+    margin-left: 65%;
+    position: absolute;
 }
 
 .meta-question {

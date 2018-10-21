@@ -48,7 +48,7 @@ export default class Chart extends Component {
                         left: 100
                     }}
                     width={350}
-                    height={250}
+                    height={125}
                     yType='ordinal'
                     xDomain={[0, 105]}
                     colorRange={['#000000']} >

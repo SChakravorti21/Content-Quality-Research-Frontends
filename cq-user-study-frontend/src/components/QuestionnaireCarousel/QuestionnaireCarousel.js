@@ -14,6 +14,21 @@ export default class QuestionnaireCarousel extends Component {
     }
 
     render() {
+        const questions = [];
+        test_data.forEach((question, index) => {
+            questions.push(
+                <div>
+                    <MetaQuestion question={question.question}/>
+                </div>
+            );
+
+            questions.push(
+                <div>
+                    <Question answers={question.answers} question={question.question}/>
+                </div>
+            );
+        });
+
         return (
             <Carousel
                 showThumbs={false}
@@ -22,12 +37,7 @@ export default class QuestionnaireCarousel extends Component {
                 useKeyboardArrows
                 dynamicHeight
                 className="presentation-mode questionnaire-carousel">
-                <div>
-                    <MetaQuestion/>
-                </div>
-                <div>
-                    <Question answers={test_data.answers} />
-                </div>
+                {questions}
             </Carousel>
         );
     }
