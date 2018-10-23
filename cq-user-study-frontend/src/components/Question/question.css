@@ -49,6 +49,11 @@
     margin-right: 2em;
 }
 
+.answer-rank {
+    margin-right: 2em;
+    width: 4em;
+}
+
 input[type="radio"] {
     margin-right: 1em;
 }

@@ -5,11 +5,15 @@ import Chart from "./Chart";
 export default class Question extends Component {
     constructor(props) {
         super(props);
-        this.state = { answerNumber: 0 };
+        this.state = {
+            ranks: [1, 2, 3, 4]
+        }
     }
 
-    updateSelectedAnswer = (answerNumber) => {
-        this.setState({ answerNumber });
+    updateRank = (index, event) => {
+        const ranks = this.state.ranks.slice();
+        ranks[index] = event.target.value;
+        this.setState({ ranks });
     };
 
     render() {
@@ -20,11 +24,11 @@ export default class Question extends Component {
                 answerer's <b>reputation</b>: {answer.reputation}</p>;
 
             return (
-                <div className="radio">
+                <div>
                     <label className="answer-label">
-                        <input type="radio"
-                               checked={this.state.answerNumber === index}
-                               onChange={() => this.updateSelectedAnswer(index)} />
+                        <input className="form-control answer-rank" type="number"
+                               min={1} max={4} value={this.state.ranks[index]}
+                                onChange={(e) => this.updateRank(index, e)}/>
                         <div>
                             {answer.text}
                             {features}
@@ -45,7 +49,7 @@ export default class Question extends Component {
                         {this.props.question}
                     </div>
                     <div className="meta-question">
-                        <p>Please pick the best answer of the two:</p>
+                        <p>Please rank the following answers (1 is best, 4 is worst):</p>
                     </div>
                     <div className="response">
                         <div className="radio">
