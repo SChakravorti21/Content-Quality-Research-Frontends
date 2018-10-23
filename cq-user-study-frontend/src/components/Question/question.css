@@ -21,13 +21,6 @@
     border: #5a6268 1px solid;
 }
 
-.answer-label {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: center;
-}
-
 .chart-wrapper {
     margin-top: 5em;
     margin-left: 65%;
@@ -52,8 +45,4 @@
 .answer-rank {
     margin-right: 2em;
     width: 4em;
-}
-
-input[type="radio"] {
-    margin-right: 1em;
 }

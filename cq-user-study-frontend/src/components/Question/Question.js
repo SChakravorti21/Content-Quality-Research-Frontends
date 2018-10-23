@@ -1,46 +1,39 @@
 import React, { Component } from "react";
+import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
 import "./question.css";
 import Chart from "./Chart";
+
+const Answer = SortableElement( ({answer}) => (
+    <div>
+        <p>{answer.text}</p>
+        <p>Number of <b>upvotes</b>: {answer.num_upvotes}</p>
+    </div>
+));
+
+const AnswerList = SortableContainer( ({answers}) => (
+   <div className="response">
+       {answers.map((answer, index) => (
+           <Answer key={`item-${index}`} index={index} answer={answer}/>
+       ))}
+   </div>
+));
 
 export default class Question extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            ranks: [1, 2, 3, 4]
-        }
+        this.state = { answers: this.props.answers }
     }
 
-    updateRank = (index, event) => {
-        const ranks = this.state.ranks.slice();
-        ranks[index] = event.target.value;
-        this.setState({ ranks });
+    onSortEnd = ({oldIndex, newIndex}) => {
+        this.setState({
+            answers: arrayMove(this.state.answers, oldIndex, newIndex)
+        });
     };
 
     render() {
-        const options = this.props.answers.map((answer, index) => {
-            let features = <p>Number of <b>thanks</b>: {answer.num_thanks},
-                number of <b>upvotes</b>: {answer.num_upvotes},
-                answer <b>rating</b>: {answer.rating}/5,
-                answerer's <b>reputation</b>: {answer.reputation}</p>;
-
-            return (
-                <div>
-                    <label className="answer-label">
-                        <input className="form-control answer-rank" type="number"
-                               min={1} max={4} value={this.state.ranks[index]}
-                                onChange={(e) => this.updateRank(index, e)}/>
-                        <div>
-                            {answer.text}
-                            {features}
-                        </div>
-                    </label>
-                </div>
-            )
-        });
-
-        const charts = this.props.answers.map((answer, index) => {
-            return <Chart showAnswer={false} index={index+1} answer={answer}/>;
-        });
+        const charts = this.props.answers.map((answer, index) => (
+            <Chart showAnswer={false} index={index+1} answer={answer}/>
+        ));
 
         return (
             <div className="view-wrapper">
@@ -49,13 +42,12 @@ export default class Question extends Component {
                         {this.props.question}
                     </div>
                     <div className="meta-question">
-                        <p>Please rank the following answers (1 is best, 4 is worst):</p>
+                        <p>
+                            Please drag and drop the following answers to rank them
+                            <i>(top-most answer is the best, last answer is worst):</i>
+                        </p>
                     </div>
-                    <div className="response">
-                        <div className="radio">
-                            {options}
-                        </div>
-                    </div>
+                    <AnswerList answers={this.state.answers} onSortEnd={this.onSortEnd} />
                 </div>
 
                 <div className="chart-wrapper">
