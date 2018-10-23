@@ -1,12 +1,22 @@
 import React, { Component } from "react";
-import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
+import {
+    SortableContainer,
+    SortableElement,
+    SortableHandle,
+    arrayMove
+} from 'react-sortable-hoc';
 import "./question.css";
 import Chart from "./Chart";
 
+const DragHandle = SortableHandle(() => <div className="drag-handle"></div>);
+
 const Answer = SortableElement( ({answer}) => (
-    <div>
-        <p>{answer.text}</p>
-        <p>Number of <b>upvotes</b>: {answer.num_upvotes}</p>
+    <div className="answer-option">
+        <DragHandle />
+        <div>
+            <p>{answer.text}</p>
+            <p>Number of <b>upvotes</b>: {answer.num_upvotes}</p>
+        </div>
     </div>
 ));
 
@@ -47,7 +57,7 @@ export default class Question extends Component {
                             <i>(top-most answer is the best, last answer is worst):</i>
                         </p>
                     </div>
-                    <AnswerList answers={this.state.answers} onSortEnd={this.onSortEnd} />
+                    <AnswerList answers={this.state.answers} onSortEnd={this.onSortEnd} useDragHandle={true} />
                 </div>
 
                 <div className="chart-wrapper">
