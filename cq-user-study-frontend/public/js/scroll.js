@@ -12,9 +12,10 @@
         const scrollElement = event.target.scrollingElement;
         const charts = document.querySelectorAll(".chart-wrapper");
         const scrollTop = scrollElement.scrollTop;
+
         charts.forEach(chart => {
             chart.style.top = scrollTop + 'px';
-        })
+        });
     };
 
     window.addEventListener('scroll', debounce(scrollHandler, 10));

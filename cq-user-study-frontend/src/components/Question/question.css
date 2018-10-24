@@ -30,6 +30,7 @@
     position: absolute;
     height: 100%;
     background-color: lightyellow;
+    transition: top 0.1s ease-out 0s;
 }
 
 .meta-question {
