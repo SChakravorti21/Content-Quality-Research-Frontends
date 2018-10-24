@@ -10,12 +10,12 @@ import Chart from "./Chart";
 
 const DragHandle = SortableHandle(() => <div className="drag-handle"></div>);
 
-const Answer = SortableElement( ({answer}) => (
+const Answer = SortableElement( ({answer, answerIndex}) => (
     <div className="answer-option">
         <DragHandle />
         <div>
-            <p>{answer.text}</p>
-            <p>Number of <b>upvotes</b>: {answer.num_upvotes}</p>
+            <p><b>Answer {answer.index}:</b> {answer.text}</p>
+            <p><i>Number of upvotes: {answer.num_upvotes}</i></p>
         </div>
     </div>
 ));
@@ -31,6 +31,7 @@ const AnswerList = SortableContainer( ({answers}) => (
 export default class Question extends Component {
     constructor(props) {
         super(props);
+        this.props.answers.forEach((answer, index) => answer.index = index + 1);
         this.state = { answers: this.props.answers }
     }
 
@@ -54,10 +55,11 @@ export default class Question extends Component {
                     <div className="meta-question">
                         <p>
                             Please drag and drop the following answers to rank them
-                            <i>(top-most answer is the best, last answer is worst):</i>
+                            in descending order:
                         </p>
                     </div>
-                    <AnswerList answers={this.state.answers} onSortEnd={this.onSortEnd} useDragHandle={true} />
+                    <AnswerList answers={this.state.answers}
+                                onSortEnd={this.onSortEnd} useDragHandle={true} />
                 </div>
 
                 <div className="chart-wrapper">
