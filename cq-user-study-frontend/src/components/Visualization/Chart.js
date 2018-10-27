@@ -8,6 +8,7 @@ import {
     HorizontalBarSeries,
 } from 'react-vis';
 import Popper from 'popper.js';
+import './chart.css'
 
 export default class Chart extends Component {
     constructor(props) {
@@ -31,6 +32,7 @@ export default class Chart extends Component {
 
         return (
             <div
+                className="chart"
                 ref={this.chartWrapper}
                 onMouseOver={this.mouseOver}
                 onMouseOut={this.mouseOut}>

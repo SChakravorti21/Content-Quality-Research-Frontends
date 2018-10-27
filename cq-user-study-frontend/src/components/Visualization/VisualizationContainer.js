@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import test_data from '../QuestionnaireCarousel/test_data';
 import Chart from "./Chart";
+import './chart.css';
 
 export const MESSAGE_KEY = "update_visualizations";
 
@@ -29,8 +30,12 @@ export default class VisualizationContainer extends Component {
             return null;
 
         const question = test_data[(this.state.visualizationIndex - 1) / 2];
-        return question.answers.map((answer, index) =>
-            <Chart showAnswer={false} index={index + 1} answer={answer}/>
+        return (
+            <div className="visualization-container">
+                {question.answers.map((answer, index) =>
+                    <Chart showAnswer={false} index={index + 1} answer={answer}/>
+                )}
+            </div>
         );
     }
 }

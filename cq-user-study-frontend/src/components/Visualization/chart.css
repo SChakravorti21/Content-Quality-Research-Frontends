@@ -1,0 +1,10 @@
+.visualization-container {
+    margin: 2em 5%;
+    text-align: left;
+}
+
+.chart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

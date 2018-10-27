@@ -22,13 +22,13 @@ export default class QuestionnaireCarousel extends Component {
         const questions = [];
         test_data.forEach((question, index) => {
             questions.push(
-                <div>
-                    <MetaQuestion question={question.question}/>
+                <div key={`meta-${index * 2}`}>
+                    <MetaQuestion question={question.question} />
                 </div>
             );
 
             questions.push(
-                <div>
+                <div key={`question-${(index * 2) + 1}`}>
                     <Question answers={question.answers} question={question.question}/>
                 </div>
             );
