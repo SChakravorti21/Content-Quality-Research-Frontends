@@ -6,7 +6,7 @@ import {
     arrayMove
 } from 'react-sortable-hoc';
 import "./question.css";
-import Chart from "./Chart";
+import Chart from "../Visualization/Chart";
 
 const DragHandle = SortableHandle(() => <div className="drag-handle"></div>);
 
@@ -42,29 +42,19 @@ export default class Question extends Component {
     };
 
     render() {
-        const charts = this.props.answers.map((answer, index) => (
-            <Chart showAnswer={false} index={index+1} answer={answer}/>
-        ));
-
         return (
-            <div className="view-wrapper">
-                <div className="question-wrapper-small">
-                    <div className="question">
-                        {this.props.question}
-                    </div>
-                    <div className="meta-question">
-                        <p>
-                            Please drag and drop the following answers to rank them
-                            in descending order:
-                        </p>
-                    </div>
-                    <AnswerList answers={this.state.answers}
-                                onSortEnd={this.onSortEnd} useDragHandle={true} />
+            <div className="question-wrapper">
+                <div className="question">
+                    {this.props.question}
                 </div>
-
-                <div className="chart-wrapper">
-                    {charts}
+                <div className="meta-question">
+                    <p>
+                        Please drag and drop the following answers to rank them
+                        in descending order:
+                    </p>
                 </div>
+                <AnswerList answers={this.state.answers}
+                            onSortEnd={this.onSortEnd} useDragHandle={true} />
             </div>
         )
     }

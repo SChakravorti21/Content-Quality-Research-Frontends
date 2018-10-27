@@ -5,32 +5,14 @@
     min-height: 100vh;
 }
 
-.question-wrapper-large {
+.question-wrapper {
     text-align: justify;
     margin: 5em;
-}
-
-.question-wrapper-small {
-    text-align: justify;
-    align-items: center;
-    margin: 2.5em;
-    width: 80%;
 }
 
 .question {
     padding: 1em;
     border: 1px solid #a9a9a9;
-}
-
-.chart-wrapper {
-    padding-top: 6em;
-    margin-left: 69%;
-    padding-left: 2%;
-    padding-right: 100em;
-    position: absolute;
-    height: 100%;
-    background-color: lightyellow;
-    transition: top 0.1s ease-out 0s;
 }
 
 .meta-question {

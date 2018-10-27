@@ -133,7 +133,7 @@ export default class Chart extends Component {
     }
 
     parseAnswers = (answer) => {
-        let scores = [
+        return [
             {
                 y: 'Credibility',
                 x: Math.round(answer.inference.credibility),
@@ -159,9 +159,7 @@ export default class Chart extends Component {
                 x: Math.round(answer.inference.overall),
                 color: '#000000' // '#F8F4A6'
             }
-        ]
-
-        return scores;
+        ];
     }
 }
 

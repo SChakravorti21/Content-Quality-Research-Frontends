@@ -15,11 +15,11 @@ export default class MetaQuestion extends Component {
         this.setState({
             familiarity: familiarity
         });
-    }
+    };
 
     render() {
         return (
-            <div className="question-wrapper-large">
+            <div className="question-wrapper">
                 <div className="question">
                     {this.props.question}
                 </div>
