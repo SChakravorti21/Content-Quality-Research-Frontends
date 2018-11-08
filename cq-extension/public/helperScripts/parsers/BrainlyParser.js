@@ -25,7 +25,7 @@
             this.rep_extension = rep_extension;
 
             this.anonymous_answer_extension = this.answer_extension + '.js-answer-content';
-            this.user_extension = '.sg-link[href*="profile"]';
+            this.user_extension = '.sg-link[data-url-hash]';
             this.num_upvotes_extension = '.sg-rate-box__counter-item-dynamic';
             this.thanks_extension = '.sg-label__number';
             this.subject_extension = '.brn-question .sg-breadcrumb-list span';

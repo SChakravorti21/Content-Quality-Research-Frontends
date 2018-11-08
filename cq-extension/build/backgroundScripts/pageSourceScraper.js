@@ -4,13 +4,13 @@ class PageSourceScraper {
         "libs/jquery.min.js", 
         "helperScripts/parsers/Parser.js",
         "helperScripts/modifiers/Modifier.js", 
-        "helperScripts/modifiers/WuFooModifier.js", 
         "helperScripts/parsers/QAParser.js", 
         "helperScripts/parsers/BrainlyParser.js", 
         "helperScripts/modifiers/BrainlyModifier.js", 
         "helperScripts/parsers/WikiParser.js",
         "helperScripts/parsers/AnswersParser.js", 
         "helperScripts/parsers/RedditParser.js", 
+        "helperScripts/parsers/AnswerbagParser.js", 
         "helperScripts/parseDocument.js"
     ]) {
         this.contentScripts = contentScripts;

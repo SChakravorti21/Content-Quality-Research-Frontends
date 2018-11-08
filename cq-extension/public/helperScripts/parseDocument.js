@@ -7,6 +7,8 @@ function initializeParser(href) {
         return new AnswersParser();
     } else if(site_href.includes('reddit')) {
         return new RedditParser();
+    } else if(site_href.includes('answerbag')) {
+        return new AnswerbagParser();
     } else {
         return new Parser();
     }
@@ -38,7 +40,9 @@ try {
         data.answers_data = parser.getParsedAnswersPage();
     } else if(site_href.includes('reddit')) {
         data.reddit_data = parser.getParsedRedditPage();
-        console.log(data);
+    } else if(site_href.includes('answerbag')) {
+        data.answerbag_data = parser.getParsedAnswerbagPage();
+        console.log(data.answerbag_data)
     }
 
     // Only for printing the JSON so that it can be emailed for reference

@@ -10,6 +10,7 @@ class PageSourceScraper {
         "helperScripts/parsers/WikiParser.js",
         "helperScripts/parsers/AnswersParser.js", 
         "helperScripts/parsers/RedditParser.js", 
+        "helperScripts/parsers/AnswerbagParser.js", 
         "helperScripts/parseDocument.js"
     ]) {
         this.contentScripts = contentScripts;
