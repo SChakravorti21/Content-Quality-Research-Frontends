@@ -40,7 +40,7 @@
         getParsedAnswerbagPage() {
             return {
                 question: this.getQuestion(),
-                answers: this.getAnswers()
+                all_answers: this.getAnswers()
             }
         }
     }
