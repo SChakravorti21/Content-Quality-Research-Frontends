@@ -9,6 +9,8 @@ function initializeParser(href) {
         return new RedditParser();
     } else if(site_href.includes('answerbag')) {
         return new AnswerbagParser();
+    } else if(site_href.includes('stackexchange')) {
+        return new StackExchangeParser();
     } else {
         return new Parser();
     }
@@ -42,7 +44,9 @@ try {
         data.reddit_data = parser.getParsedRedditPage();
     } else if(site_href.includes('answerbag')) {
         data.answerbag_data = parser.getParsedAnswerbagPage();
-        console.log(JSON.stringify(data.answerbag_data))
+    } else if(site_href.includes('stackexchange')) {
+        data.stackexchange_data = parser.getParsedStackExchangePage();
+        console.log(data.stackexchange_data);
     }
 
     // Only for printing the JSON so that it can be emailed for reference
