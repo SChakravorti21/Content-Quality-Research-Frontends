@@ -8,13 +8,13 @@
         }
 
         getQuestion() {
-            const question_path = '#question-header';
+            const question_path = '#question-header a.question-hyperlink';
             const question_description_path = '.question .post-text';
 
             const question = document.querySelector(question_path).innerText; 
             const description = document.querySelector(question_description_path).innerText; 
 
-            return `${question} ${description}`;
+            return `${question} –– ${description}`;
         }
 
         getAnswers() {
@@ -29,12 +29,27 @@
 
                 answers.push({
                     username: element.querySelector(username_path).innerText,
+                    reputation: this.getReputationForAnswerer(element),
                     answer: element.querySelector(answer_path).innerText,
                     upvotes: Number.parseInt(element.querySelector(upvotes_path).innerText)
                 });
             });
 
             return answers;
+        }
+
+        getReputationForAnswerer(answer_node) {
+            const reputation_path = 'span.reputation-score';
+            const rep_elem = answer_node.querySelector(reputation_path);
+            const title_elems = rep_elem.getAttribute('title').split(' ');
+            const reputation_text = title_elems[title_elems.length - 1];
+            let rep = Number.parseInt(reputation_text.replace(',', ''));
+
+            if(!rep) { // rep === NaN
+                rep = Number.parseInt(rep_elem.innerText.replace(',', ''));
+            }
+
+            return rep;
         }
 
         getParsedStackExchangePage() {
