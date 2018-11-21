@@ -14,7 +14,7 @@
             const question = document.querySelector(question_path).innerText; 
             const description = document.querySelector(question_description_path).innerText; 
 
-            return `${question} ${description}`;
+            return `${question} –– ${description}`;
         }
 
         getAnswers() {

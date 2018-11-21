@@ -9,7 +9,7 @@ function initializeParser(href) {
         return new RedditParser();
     } else if(site_href.includes('answerbag')) {
         return new AnswerbagParser();
-    } else if(site_href.includes('stackexchange')) {
+    } else if(site_href.includes('stackexchange') || site_href.includes('stackoverflow')) {
         return new StackExchangeParser();
     } else {
         return new Parser();
@@ -44,7 +44,7 @@ try {
         data.reddit_data = parser.getParsedRedditPage();
     } else if(site_href.includes('answerbag')) {
         data.answerbag_data = parser.getParsedAnswerbagPage();
-    } else if(site_href.includes('stackexchange')) {
+    } else if(site_href.includes('stackexchange') || site_href.includes('stackoverflow')) {
         data.stackexchange_data = parser.getParsedStackExchangePage();
         console.log(data.stackexchange_data);
     }
