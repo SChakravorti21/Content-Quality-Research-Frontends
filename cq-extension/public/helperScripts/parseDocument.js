@@ -42,11 +42,11 @@ try {
         data.answers_data = parser.getParsedAnswersPage();
     } else if(site_href.includes('reddit')) {
         data.reddit_data = parser.getParsedRedditPage();
+        console.log(data.reddit_data);
     } else if(site_href.includes('answerbag')) {
         data.answerbag_data = parser.getParsedAnswerbagPage();
     } else if(site_href.includes('stackexchange') || site_href.includes('stackoverflow')) {
         data.stackexchange_data = parser.getParsedStackExchangePage();
-        console.log(data.stackexchange_data);
     }
 
     // Only for printing the JSON so that it can be emailed for reference
