@@ -4,10 +4,7 @@
     window.RedditParser = class RedditParser extends QAParser {
         constructor() {
             super('a.title', 'div.md-container', 'div.score.unvoted');
-            this.answer_selectors = [
-                '.commentarea .comment[itemprop="acceptedAnswer"] > .entry.unvoted',
-                '.commentarea .comment[itemprop="suggestedAnswer"] > .entry.unvoted'
-            ]
+            this.answer_selector = '.commentarea > .sitetable > .comment > .entry.unvoted';
         }
 
         getTimesGilded(answer_node, gild_path) {
@@ -27,32 +24,57 @@
             return Number.parseInt(karma_elem.getAttribute('title'));
         }
 
+        fetchUserKarma(username, errorCallback) {
+            return fetch(`https://old.reddit.com/user/${username}/about.json`)
+                .then(response => response.json())
+                .then(user => user['data']['link_karma'] + user['data']['comment_karma'])
+                .catch(status, err => errorCallback(err));
+        }
+
         getAnswers() {
-            let all_answers = [];
-            this.answer_selectors.forEach(selector => {
-                document.querySelectorAll(selector).forEach(answer_node => {
+            return new Promise((resolve, reject) => {
+
+                let get_requests = [];
+                let all_answers = [];
+
+                document.querySelectorAll(this.answer_selector).forEach(answer_node => {
                     const username_elem = answer_node.querySelector('.tagline .author');
                     const body_elem = answer_node.querySelector('.usertext-body .md');
-                    
+                    if(!username_elem || !body_elem) return;
+
+                    const username = username_elem.innerText;
+                    get_requests.push(this.fetchUserKarma(username, reject));
+
                     all_answers.push({
-                        username: username_elem.innerText,
+                        username: username,
                         answer: body_elem.innerText,
                         upvotes: this.getKarma(answer_node),
                         silver: this.getTimesGilded(answer_node, 'span.gilded-gid1-icon'),
                         gold: this.getTimesGilded(answer_node, 'span.gilded-gid2-icon')
-                    })
-                })
-            })
+                    });
 
-            return all_answers;
+                });
+
+                Promise.all(get_requests)
+                    .then(results => {
+                        all_answers.forEach((answer, index) => {
+                            answer['user_karma'] = results[index];
+                        });
+                    })
+                    .then(() => resolve(all_answers))
+                    .catch(error => reject(error));
+            });
         }
 
-        getParsedRedditPage() {
-            return {
-                title: this.getQuestion(),
-                body: this.getBody(),
-                all_answers: this.getAnswers()
-            }
+        getParsedRedditPage(resolvePageSourceCallback) {
+            this.getAnswers()
+                .then(all_answers => {
+                    resolvePageSourceCallback({
+                        title: this.getQuestion(),
+                        body: this.getBody(),
+                        all_answers: all_answers
+                    });
+                });
         }
 
     }
