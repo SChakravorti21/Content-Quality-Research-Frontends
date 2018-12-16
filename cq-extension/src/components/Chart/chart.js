@@ -35,7 +35,7 @@ export default class Chart extends Component {
                 onMouseOver={this.mouseOver}
                 onMouseOut={this.mouseOut} >
 
-                <p><b>Answer {this.props.index}:</b> {this.props.answer.text} </p>
+                <p><b>Answer {this.props.index}:</b> {this.props.answer.content} </p>
 
                 <XYPlot
                     margin={{
