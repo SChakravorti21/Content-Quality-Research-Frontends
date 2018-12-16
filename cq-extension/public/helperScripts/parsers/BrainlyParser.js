@@ -6,7 +6,7 @@
             // The answer case class and selector extensions are stored for later use
             // in getting all answers and their data in a cleaner manner since the 
             // extensions can be applied to every answer node.
-            let base_answer_class = '.brn-answer ';
+            let base_answer_class = '.brn-kodiak-answer ';
             let answer_extension = '.sg-text.js-answer-content';
             let upvotes_extension = '.sg-rate-box__rate';
             let rep_extension = '.sg-breadcrumb-list__element .sg-link--gray';
