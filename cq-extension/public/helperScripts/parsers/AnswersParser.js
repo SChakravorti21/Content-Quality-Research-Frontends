@@ -9,7 +9,12 @@
         getParsedAnswersPage() {
             return {
                 question: this.getQuestion(),
-                answer: this.getTopAnswer() 
+                all_answers: [{
+                    content: this.getTopAnswer(),
+                    author: 0,
+                    info_content: 0,
+                    info_author: 0
+                }]
             }
         }
     }

@@ -29,8 +29,12 @@
 
                 answers.push({
                     username: element.querySelector(username_path).innerText,
-                    answer: element.querySelector(answer_path).innerText,
-                    upvotes: Number.parseInt(element.querySelector(upvotes_path).innerText)
+                    upvotes: Number.parseInt(element.querySelector(upvotes_path).innerText),
+                    
+                    content: element.querySelector(answer_path).innerText,
+                    author: 1,
+                    info_content: 1,
+                    info_author: 0
                 });
             });
 

@@ -8,14 +8,13 @@ chrome.tabs.onUpdated.addListener(function(activeInfo) {
 function sendCollectedData(payload) {
     console.log(payload)
 
-    if(!payload.brainly_data || payload.brainly_data.all_answers.length < 1)
+    if(!payload.scraped || payload.scraped.all_answers.length < 1)
         return;
     
     console.log('sending to server');
     $.ajax({
         type: 'POST',
-        url: 'http://ugc-django-server.herokuapp.com/reliability/generate_report',
-        contentType: 'application/json; charset=utf-8',
+        url: 'http://127.0.0.1:8000/reliability/generate_report',
         dataType: 'json',
         // The Django server expects JSON payloads as a String then parses it using json.loads(payload)
         data: JSON.stringify(payload),

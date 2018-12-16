@@ -46,7 +46,7 @@
          */
         getParsedBrainlyPage() {
             // Create object to return
-            var parsed_data = {
+            let parsed_data = {
                 question: this.getQuestion(),
                 subject: this.getSubject()
             };
@@ -73,14 +73,14 @@
          * in getParsedBrainlyPage().
          */
         getAllAnswers() {
-            var answer_list = [];
+            let answer_list = [];
             // Gets a list of all of the answer nodes.
             let all_answer_nodes = document.querySelectorAll(this.base_answer_class);
 
             // For each answer node, parse the relevant data
             all_answer_nodes.forEach(answer_node => {
-                var text = answer_node.querySelector(this.answer_extension).innerText;
-                var user;
+                let text = answer_node.querySelector(this.answer_extension).innerText;
+                let user;
                 // Edge case for anonymous answerers, the selectors are a bit different
                 if (text === 'Brainly User') {
                     user = text;
@@ -89,7 +89,7 @@
                     user = answer_node.querySelector(this.user_extension).innerText;
                 }
 
-                var rep = 'Brainly User';
+                let rep = 'Brainly User';
                 try {
                     rep = answer_node.querySelectorAll(this.rep_extension)[1].innerText;
                 } catch (e) {
@@ -107,11 +107,15 @@
                     question: this.getQuestion(),
                     subject: this.getSubject(),
                     user: user,
-                    text: text,
                     rating: upvotes,
                     reputation: rep,
                     num_upvotes: num_upvotes,
-                    num_thanks: num_thanks
+                    num_thanks: num_thanks,
+
+                    content: text,
+                    author: 1,
+                    info_content: 1,
+                    info_author: 1
                 };
 
                 answer_list.push(answer_data);

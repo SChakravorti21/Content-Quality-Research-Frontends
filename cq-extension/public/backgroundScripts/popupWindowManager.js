@@ -32,7 +32,7 @@ class PopupWindowManager {
         console.log('updating window')
         
         const self = this;
-        chrome.storage.sync.set(
+        chrome.storage.local.set(
             { 'collected': collected_data, 'response': response }, 
             function() {
                 chrome.tabs.reload(self.popupTabId, function() {

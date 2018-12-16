@@ -47,10 +47,14 @@
 
                     all_answers.push({
                         username: username,
-                        answer: body_elem.innerText,
                         upvotes: this.getKarma(answer_node),
                         silver: this.getTimesGilded(answer_node, 'span.gilded-gid1-icon'),
-                        gold: this.getTimesGilded(answer_node, 'span.gilded-gid2-icon')
+                        gold: this.getTimesGilded(answer_node, 'span.gilded-gid2-icon'),
+
+                        content: body_elem.innerText,
+                        author: 1,
+                        info_content: 1,
+                        info_author: 1
                     });
 
                 });
@@ -66,14 +70,14 @@
             });
         }
 
-        getParsedRedditPage(resolvePageSourceCallback) {
-            this.getAnswers()
+        getParsedRedditPage() {
+            return this.getAnswers()
                 .then(all_answers => {
-                    resolvePageSourceCallback({
+                    return {
                         title: this.getQuestion(),
                         body: this.getBody(),
                         all_answers: all_answers
-                    });
+                    };
                 });
         }
 

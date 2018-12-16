@@ -47,19 +47,23 @@
 
         let resolveImmediately = true;
         if(site_href.includes('wiki')) {
-            data.wiki_data = parser.getParsedWikiPage(['.mw-parser-output', '#mw-content-text']);
+            data.scraped = parser.getParsedWikiPage(['.mw-parser-output', '#mw-content-text']);
         } else if(site_href.includes('brainly')) {
-            data.brainly_data = parser.getParsedBrainlyPage();
+            data.scraped = parser.getParsedBrainlyPage();
             new BrainlyModifier().modifyPageSource();
         } else if(site_href.includes('answers')) {
-            data.answers_data = parser.getParsedAnswersPage();
+            data.scraped = parser.getParsedAnswersPage();
         } else if(site_href.includes('reddit')) {
             resolveImmediately = false;
-            data.reddit_data = parser.getParsedRedditPage(resolvePageSource);
+            parser.getParsedRedditPage()
+                .then(parsed_reddit_page => {
+                    data.scraped = parsed_reddit_page;
+                    resolvePageSource(data);
+                });
         } else if(site_href.includes('answerbag')) {
-            data.answerbag_data = parser.getParsedAnswerbagPage();
+            data.scraped = parser.getParsedAnswerbagPage();
         } else if(site_href.includes('stackexchange') || site_href.includes('stackoverflow')) {
-            data.stackexchange_data = parser.getParsedStackExchangePage();
+            data.scraped = parser.getParsedStackExchangePage();
         }
         
         if(resolveImmediately)
