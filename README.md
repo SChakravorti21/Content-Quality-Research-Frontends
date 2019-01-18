@@ -1,5 +1,5 @@
 # What is it?
-The Content Quality Extension is a research project allowing users to determine the validity of user-generated content in realtime as they are browsing the Internet. This is implemented as a React Chrome extension that makes API calls to a Django server, where statistical models created using `numpy` and `pandas` are invoked.
+The Content Quality Extension is a research project allowing users to determine the validity of user-generated content in realtime as they are browsing the Internet. This is implemented as a React Chrome extension that makes API calls to a Django server, where statistical models created using `sklearn`,`numpy`, and `pandas` are invoked.
 
 # General Architecture
 As mentioned previously, there are two parts to this application: the user-facing Chrome extension and the backend Django server. In order to understand how the extension works, it is useful to understand the steps that take place when a user visits a new page:
@@ -126,3 +126,14 @@ You may want to create a new parser if the extension needs to target a new site,
 3. Now that the parser is created, add its path to `contentScripts` in the constructor of `PageSourceScraper`. This will ensure that the scraper (which is a content script) gets injected at runtime.
 4. Inside `parseDocument.js`, create logic to initialize and use the parser based on the site URL. This script is pretty self-explanatory as the same is done for several other parsers.
 5. This is all the setup necessary! To test the parser, add `console.log` statements or use Chrome DevTools as appropriate, and visit a page that the parser is supposed to scrape.
+
+## Modifying the statistical models
+In order for the server to train the models and run correctly, one file named `t.xlsx` is expected under the `QAServer/regression` folder. This is the training data used to generate the models. If you would like to test the models as well, you will need a file named `test.xlsx` under the same folder, and you can directly run `python3 CQTool.py` to test the model.
+
+Much of the training and model generation code is located within `QAServer/regression/CQTool.py` in the server repository. If the model and training code itself changes, that is where the new code should go.
+    
+  - Note: try to keep the same code structure if possible because that makes it easy for our API endpoint to use the models.
+    
+If the features collected for user-generated content need to be changed, these changes will likely go in either `QAServer/regression/calculate_features.py` or `QAServer/regression/format_answers.py`.
+
+After any modifications to the features or models are made, be sure to update `get_inference()` and `get_features_df()` inside `QAServer/model_interface/views` to match the data that is expected by the model.
