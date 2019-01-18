@@ -71,7 +71,7 @@ Setting up the backend is a bit more complicated. We've used `pipenv` to manage 
 1. Inside the server folder (whatever you named it when cloning the repo), create a `pipenv` virtual environment by running `pipenv install`. This will additionally install all dependencies.
 2. Run `pipenv shell` to activate the virtual environment
 3. Copy the contents of `Procfile` and paste it into your shell
-4. The server should be up and running
+4. The server should be up and running on `localhost:8000`
 
 ## Deploying to Heroku
 In order to deploy the application to Heroku, follow these steps:
@@ -81,3 +81,48 @@ In order to deploy the application to Heroku, follow these steps:
 4. After using `git commit -m` to complete the commit, call `git push heroku master`
 4. Heroku will deploy the application for you. Finally, check what you Heroku project's base URL is through the Heroku website, and update the URL in the frontend's `background.js` to reflect that.
 5. Reload the extension in Chrome to use the new Heroku deployment.
+
+# Development Tips
+
+## Creating a new parser
+You may want to create a new parser if the extension needs to target a new site, so here are some steps to follow when doing so:
+1. Inside `cq-extenion/public/helperScripts/parsers`, create a JS file for your parser (ideally name it `{SiteName}Parser.js` for consistency)
+2. The parser should be structured like this to ensure it functions properly:
+```JavaScript
+// Define the parser in an anonymous function to guard the definition,
+// otherwise the parser will be defined on the window multiple times
+(function() {
+    // Define the parser only if this has not already been done
+    if(window.ParserName)
+        return;
+        
+    // The parser can extend QAParser to receive some functionality out-of-the-box,
+    // but it does not strictly need to extend QAParser to function correctly
+    window.ParserName = class ParserName extends QAParser {
+        constructor() {
+            ...
+        }
+        
+        // A function like this can be called by parseDocument.js to scrape
+        // the page content
+        getParsedSiteNamePage() {
+            // This is the type of data expected by the backend:
+            // A JSON array called "all_answers" which contains JSON objects of the format below.
+            // Additional content can be included aside from what is specified for development/debugging purposes
+            return {
+                all_answers: [
+                    {
+                        content: (String -- the UGC that will be scored),
+                        author: (String -- the author name),
+                        info_content: (boolean -- whether any contextual data about the content is known),
+                        info_author: (boolean -- whether any contextual data about the author is known)
+                    }
+                ]
+            }
+        }
+    }
+})() // Make sure to call the anonymous function, otherwise the parser will never be defined
+```
+3. Now that the parser is created, add its path to `contentScripts` in the constructor of `PageSourceScraper`. This will ensure that the scraper (which is a content script) gets injected at runtime.
+4. Inside `parseDocument.js`, create logic to initialize and use the parser based on the site URL. This script is pretty self-explanatory as the same is done for several other parsers.
+5. This is all the setup necessary! To test the parser, add `console.log` statements or use Chrome DevTools as appropriate, and visit a page that the parser is supposed to scrape.
